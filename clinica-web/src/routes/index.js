@@ -9,6 +9,7 @@ import NotFound from '../pages/NotFound'
 
 import Header from '../components/Header/Header.js';
 import '../App.css';
+import AppointmentsPatient from '../pages/AppointmentsPatient/index.js';
 
 function AppRoutes() {
   return (
@@ -22,6 +23,8 @@ function AppRoutes() {
         <Route path="/register-doctor" element={<RegisterDoctor />} />
         <Route path="/register-patient" element={<RegisterPatient />} />
         <Route path="/appointments" element={<Appointments />} />
+        <Route path="/appointments-patient" element={<AppointmentsPatient />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router> 
