@@ -3,8 +3,6 @@ package com.gestao.clinica.entities;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.management.relation.Role;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -29,28 +27,24 @@ public class Paciente {
 	 @OneToMany(mappedBy = "paciente")
 	    private List<Consulta> consultas;
 	 
-	    @Enumerated(EnumType.STRING)
-	    @Column(nullable = false)
-	    private Role role;
+	 @Enumerated(EnumType.STRING)
+	 @Column(nullable = false)
+	 private Roles role;
 	
 	
 	public Paciente() {
 	}
 
-
-	
-
-	public Paciente(Long id, String nome, LocalDate dataNasc, String email, String telefone, List<Consulta> consultas) {
+	public Paciente(Long id, String nome, LocalDate dataNasc, String email, String telefone, List<Consulta> consultas,
+			Roles role) {
 		this.id = id;
 		this.nome = nome;
 		this.dataNasc = dataNasc;
 		this.email = email;
 		this.telefone = telefone;
 		this.consultas = consultas;
+		this.role = role;
 	}
-
-
-
 
 	public Long getId() {
 		return id;
@@ -114,6 +108,16 @@ public class Paciente {
 	public void setConsultas(List<Consulta> consultas) {
 		this.consultas = consultas;
 	}
+
+	public Roles getRole() {
+		return role;
+	}
+
+	public void setRole(Roles role) {
+		this.role = role;
+	}
+	
+	
 	
 		
 	

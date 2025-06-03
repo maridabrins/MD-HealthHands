@@ -3,42 +3,42 @@ package com.gestao.clinica.dto;
 import java.time.LocalDate;
 
 import com.gestao.clinica.entities.Paciente;
+import com.gestao.clinica.entities.Roles;
 
 public class PacienteDTO {
 	
-	private Long id;
+
 	private String nome;
 	private LocalDate dataNasc;
 	private String email;
 	private String telefone;
+	private Roles role;
+	
 	
 	public PacienteDTO() {
 	}
 
-	public PacienteDTO(Long id, String nome, LocalDate dataNasc, String email, String telefone) {
-		this.id = id;
+	
+	
+	public PacienteDTO(String nome, LocalDate dataNasc, String email, String telefone, Roles role) {
 		this.nome = nome;
 		this.dataNasc = dataNasc;
 		this.email = email;
 		this.telefone = telefone;
+		this.role = role;
 	}
-	
+
+
+
 	public PacienteDTO(Paciente entity) {
-		id = entity.getId();
 		nome = entity.getNome();
 		dataNasc = entity.getDataNasc();
 		email = entity.getEmail();
 		telefone = entity.getTelefone();
+		role = entity.getRole();
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public String getNome() {
 		return nome;
 	}
@@ -70,6 +70,20 @@ public class PacienteDTO {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
+
+
+	public Roles getRole() {
+		return role;
+	}
+
+
+
+	public void setRole(Roles role) {
+		this.role = role;
+	}
+	
+	
 
 	
 
