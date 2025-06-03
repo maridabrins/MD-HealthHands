@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.gestao.clinica.dto.PacienteDTO;
 import com.gestao.clinica.entities.Paciente;
+import com.gestao.clinica.entities.Roles;
 import com.gestao.clinica.repositories.PacienteRepository;
 
 import jakarta.transaction.Transactional;
@@ -37,6 +38,8 @@ public class PacienteService {
 		entity.setEmail(dto.getEmail());
 		entity.setDataNasc(dto.getDataNasc());
 		entity.setTelefone(dto.getTelefone());
+		
+		entity.setRole(Roles.PACIENTE);
 		
 		entity = pacienteRepository.save(entity);
 		return new PacienteDTO(entity);

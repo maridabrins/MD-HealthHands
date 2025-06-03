@@ -7,6 +7,7 @@ import com.gestao.clinica.entities.Roles;
 
 public class PacienteDTO {
 	
+	private Long id;
 
 	private String nome;
 	private LocalDate dataNasc;
@@ -20,7 +21,10 @@ public class PacienteDTO {
 
 	
 	
-	public PacienteDTO(String nome, LocalDate dataNasc, String email, String telefone, Roles role) {
+	
+
+	public PacienteDTO(Long id, String nome, LocalDate dataNasc, String email, String telefone, Roles role) {
+		this.id = id;
 		this.nome = nome;
 		this.dataNasc = dataNasc;
 		this.email = email;
@@ -30,15 +34,36 @@ public class PacienteDTO {
 
 
 
+
+
 	public PacienteDTO(Paciente entity) {
+		id = entity.getId();
 		nome = entity.getNome();
 		dataNasc = entity.getDataNasc();
 		email = entity.getEmail();
 		telefone = entity.getTelefone();
 		role = entity.getRole();
 	}
+	
+	
 
 	
+	public Long getId() {
+		return id;
+	}
+
+
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+
+
 	public String getNome() {
 		return nome;
 	}
