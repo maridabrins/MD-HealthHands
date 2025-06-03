@@ -1,9 +1,12 @@
 package com.gestao.clinica.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +22,9 @@ public class Medico {
 	private String telefone;
 	private String email;
 	private Especialidades especialidade;
+	
+	  @OneToMany(mappedBy = "medico")
+	    private List<Consulta> consultas;
 	
 	public Medico() {
 	}
