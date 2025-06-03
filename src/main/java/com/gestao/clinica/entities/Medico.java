@@ -21,6 +21,7 @@ public class Medico {
 	private String nome;
 	private String telefone;
 	private String email;
+	
 	private Especialidades especialidade;
 	private Roles role;
 	
