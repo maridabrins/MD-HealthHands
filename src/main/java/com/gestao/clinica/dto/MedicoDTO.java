@@ -2,6 +2,7 @@ package com.gestao.clinica.dto;
 
 import com.gestao.clinica.entities.Especialidades;
 import com.gestao.clinica.entities.Medico;
+import com.gestao.clinica.entities.Roles;
 
 public class MedicoDTO {
 	
@@ -11,17 +12,19 @@ public class MedicoDTO {
 	private String telefone;
 	private String email;
 	private Especialidades especialidade;
+	private Roles role;
 	
 	public MedicoDTO() {
 	}
 
-	public MedicoDTO(Long id, int crm, String nome, String telefone, String email, Especialidades especialidade) {
+	public MedicoDTO(Long id, int crm, String nome, String telefone, String email, Especialidades especialidade, Roles role) {
 		this.id = id;
 		this.crm = crm;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
 		this.especialidade = especialidade;
+		this.role = role;
 	}
 	
 	public MedicoDTO(Medico entity) {
@@ -31,6 +34,7 @@ public class MedicoDTO {
 		telefone = entity.getTelefone();
 		email = entity.getEmail();
 		especialidade = entity.getEspecialidade();
+		role = entity.getRole();
 	}
 
 	public Long getId() {
@@ -79,6 +83,14 @@ public class MedicoDTO {
 
 	public void setEspecialidade(Especialidades especialidade) {
 		this.especialidade = especialidade;
+	}
+
+	public Roles getRole() {
+		return role;
+	}
+
+	public void setRole(Roles role) {
+		this.role = role;
 	}
 	
 	

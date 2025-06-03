@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.gestao.clinica.dto.MedicoDTO;
 import com.gestao.clinica.entities.Medico;
+import com.gestao.clinica.entities.Roles;
 import com.gestao.clinica.repositories.MedicoRepository;
 
 import jakarta.transaction.Transactional;
@@ -38,6 +39,8 @@ public class MedicoService {
 		entity.setCrm(dto.getCrm());
 		entity.setEspecialidade(dto.getEspecialidade());
 		entity.setTelefone(dto.getTelefone());
+		
+		entity.setRole(Roles.MEDICO);
 		
 		entity = medicoRepository.save(entity);
 		return new MedicoDTO(entity);

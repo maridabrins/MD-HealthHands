@@ -22,21 +22,26 @@ public class Medico {
 	private String telefone;
 	private String email;
 	private Especialidades especialidade;
+	private Roles role;
 	
-	  @OneToMany(mappedBy = "medico")
-	    private List<Consulta> consultas;
+	 @OneToMany(mappedBy = "medico")
+	 private List<Consulta> consultas;
 	
 	public Medico() {
 	}
 
-	public Medico(Long id, int crm, String nome, String telefone, String email, Especialidades especialidade) {
+	public Medico(Long id, int crm, String nome, String telefone, String email, Especialidades especialidade,
+			Roles role, List<Consulta> consultas) {
 		this.id = id;
 		this.crm = crm;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
 		this.especialidade = especialidade;
+		this.role = role;
+		this.consultas = consultas;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -86,7 +91,25 @@ public class Medico {
 		this.especialidade = especialidade;
 	}
 	
-	
+
+	public Roles getRole() {
+		return role;
+	}
+
+
+	public void setRole(Roles role) {
+		this.role = role;
+	}
+
+
+	public List<Consulta> getConsultas() {
+		return consultas;
+	}
+
+
+	public void setConsultas(List<Consulta> consultas) {
+		this.consultas = consultas;
+	}
 	
 	
 	
