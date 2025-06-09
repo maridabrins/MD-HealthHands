@@ -1,3 +1,4 @@
+
 package com.gestao.clinica.services;
 
 import java.time.Instant;
@@ -57,7 +58,7 @@ public class LoginService implements UserDetailsService {
 					Algorithm.HMAC256(chaveSecreta);
 			
 			String token = JWT.create()
-					.withIssuer("API Colegio")
+					.withIssuer("clinica-api")
 					.withSubject(usuario.getLogin())
 					.withExpiresAt(Instant.now().plusSeconds(3600))
 					.sign(algorithm);
@@ -76,7 +77,8 @@ public class LoginService implements UserDetailsService {
 			Algorithm algorithm = 
 					Algorithm.HMAC256(chaveSecreta);
 			return JWT.require(algorithm)
-					.withIssuer("API Colegio").build()
+					//.withIssuer("clinica-api")
+					.build()
 					.verify(token).getSubject();			
 			
 		} catch (JWTCreationException | 
