@@ -119,7 +119,7 @@ public class ConsultaService {
 	    }).collect(Collectors.toList());
 	}
 	
-	public Consulta editarConsulta(Long consultaId, LocalDate novaData) {
+	public Consulta editarConsulta(Long consultaId, LocalDate data) {
 	    // 1. Buscar a consulta
 	    Optional<Consulta> consultaOpt = consultaRepository.findById(consultaId);
 	    if (consultaOpt.isEmpty()) {
@@ -129,17 +129,17 @@ public class ConsultaService {
 	    Consulta consulta = consultaOpt.get();
 
 	    // 2. Validar se o novo horário está disponível para o médico
-	    if (consultaRepository.existsByMedicoAndData(consulta.getMedico(), novaData)) {
+	    if (consultaRepository.existsByMedicoAndData(consulta.getMedico(), data)) {
 	        throw new RuntimeException("O médico já possui uma consulta nessa data.");
 	    }
 
 	    // 3. Validar se o novo horário está disponível para o paciente
-	    if (consultaRepository.existsByPacienteAndData(consulta.getPaciente(), novaData)) {
+	    if (consultaRepository.existsByPacienteAndData(consulta.getPaciente(), data)) {
 	        throw new RuntimeException("O paciente já possui uma consulta nessa data.");
 	    }
 
 	    // 4. Atualizar a data
-	    consulta.setData(novaData);
+	    consulta.setData(data);
 	    return consultaRepository.save(consulta);
 	}
 	
@@ -161,14 +161,7 @@ public class ConsultaService {
 	    boolean isMedico = auth.getAuthorities().stream()
 	        .anyMatch(role -> role.getAuthority().equals("ROLE_MEDICO"));
 
-	    // 3. Validar se o usuário tem permissão para cancelar essa consulta
-	    if (isPaciente && !consulta.getPaciente().getEmail().equals(usuarioLogado)) {
-	        throw new RuntimeException("Paciente não autorizado a cancelar esta consulta.");
-	    }
-
-	    if (isMedico && !consulta.getMedico().getEmail().equals(usuarioLogado)) {
-	        throw new RuntimeException("Médico não autorizado a cancelar esta consulta.");
-	    }
+	   
 
 	    // 4. Cancelar a consulta 
 	    consultaRepository.deleteById(consultaId);

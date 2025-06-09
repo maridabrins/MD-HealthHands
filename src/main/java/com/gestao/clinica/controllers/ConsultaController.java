@@ -6,7 +6,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.gestao.clinica.dto.ConsultaDTO;
 import com.gestao.clinica.dto.ConsultaResponseDTO;
@@ -29,26 +38,26 @@ public class ConsultaController {
         }
     }
 
-    
-    @GetMapping
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MEDICO') or hasRole('PACIENTE')")
+    @GetMapping("/all")
     public ResponseEntity<List<ConsultaResponseDTO>> listarConsultas() {
         return ResponseEntity.ok(consultaService.listarConsultas());
     }
 
     
-    @PutMapping("/{id}")
+    @PutMapping("update/{id}")
     public ResponseEntity<?> editarConsulta(
             @PathVariable Long id,
-            @RequestParam("novaData") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate novaData) {
+            @RequestBody LocalDate data) {
         try {
-            return ResponseEntity.ok(consultaService.editarConsulta(id, novaData));
+            return ResponseEntity.ok(consultaService.editarConsulta(id, data));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<?> cancelarConsulta(@PathVariable Long id) {
         try {
             consultaService.cancelarConsulta(id);
