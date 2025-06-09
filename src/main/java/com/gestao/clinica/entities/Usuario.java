@@ -1,3 +1,4 @@
+
 package com.gestao.clinica.entities;
 
 import java.util.Collection;

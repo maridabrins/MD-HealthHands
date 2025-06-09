@@ -8,18 +8,27 @@ import org.springframework.stereotype.Service;
 
 import com.gestao.clinica.dto.PacienteDTO;
 import com.gestao.clinica.entities.Paciente;
-import com.gestao.clinica.entities.Roles;
+import com.gestao.clinica.entities.Role;
+import com.gestao.clinica.entities.Usuario;
 import com.gestao.clinica.repositories.PacienteRepository;
+import com.gestao.clinica.repositories.UsuarioRepository;
 
 import jakarta.transaction.Transactional;
 
 @Service
 public class PacienteService {
 	
+	
 	@Autowired
 	PacienteRepository pacienteRepository;
+	@Autowired
+	UsuarioRepository usuarioRepository;
 	
-	//exibindo lista de 
+	@Autowired
+	UsuarioService usuarioService;
+	
+	
+	//exibindo lista de pacientes
 	@Transactional
 	public List<PacienteDTO> findAll(){
 		List<Paciente> lista = pacienteRepository.findAll();
@@ -31,20 +40,33 @@ public class PacienteService {
 		return new PacienteDTO(entity);
 	}
 	
-	@Transactional
-	public PacienteDTO create (PacienteDTO dto) {
-		Paciente entity = new Paciente();
-		
-		entity.setNome(dto.getNome());
-		entity.setEmail(dto.getEmail());
-		entity.setDataNasc(dto.getDataNasc());
-		entity.setTelefone(dto.getTelefone());
-		
-		entity.setRole(Roles.PACIENTE);
-		
-		entity = pacienteRepository.save(entity);
-		return new PacienteDTO(entity);
+	public PacienteDTO create(PacienteDTO dto) {
+        Usuario usuario = new Usuario();
+        usuario.setLogin(dto.getLogin());
+        usuario.setSenha(dto.getSenha()); 
+        usuario.setPerfil(Role.PACIENTE);
+        
+       Usuario usuarioSalvo = usuarioService.gravar(usuario);
+     
+
+        Paciente paciente = new Paciente();
+        paciente.setNome(dto.getNome());
+        paciente.setDataNasc(dto.getDataNasc());
+        paciente.setUsuario(usuarioSalvo);
+        pacienteRepository.save(paciente);
+        return PacienteDTO(paciente); 
+    }
+
+
+	
+	private PacienteDTO PacienteDTO(Paciente paciente) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+	@Transactional
+    public Paciente save(Paciente paciente) {
+        return pacienteRepository.save(paciente);
+    }
 	
 	@Transactional
 	public PacienteDTO update (PacienteDTO dto, Long id) {

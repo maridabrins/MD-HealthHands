@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gestao.clinica.dto.MedicoDTO;
 import com.gestao.clinica.dto.PacienteDTO;
 import com.gestao.clinica.services.PacienteService;
 
@@ -34,11 +35,14 @@ public class PacienteController {
 		return ResponseEntity.ok(dto);
 	}
 	
+	
 	@PostMapping("/create")
 	public ResponseEntity<PacienteDTO> create (@RequestBody PacienteDTO dto){
 		 dto = pacienteService.create(dto);
 		 return ResponseEntity.ok(dto);
 	}
+
+
 	
 	@PutMapping("/update/{id}")
 	public ResponseEntity<PacienteDTO> update(@RequestBody PacienteDTO dto, @PathVariable Long id){
