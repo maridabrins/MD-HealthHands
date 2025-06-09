@@ -21,6 +21,10 @@ import com.gestao.clinica.dto.ConsultaDTO;
 import com.gestao.clinica.dto.ConsultaResponseDTO;
 import com.gestao.clinica.services.ConsultaService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping("/consultas")
 public class ConsultaController {
@@ -28,48 +32,90 @@ public class ConsultaController {
     @Autowired
     private ConsultaService consultaService;
 
-   
+    @Operation(summary = "Agendar uma consulta")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Consulta agendada com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Erro ao agendar consulta")
+    })
     @PostMapping("/agendar")
     public ResponseEntity<?> agendarConsulta(@RequestBody ConsultaDTO dto) {
         try {
-            return ResponseEntity.ok(consultaService.agendarConsulta(dto));
+            var consulta = consultaService.agendarConsulta(dto);
+            return ResponseEntity.status(201).body(consulta);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
+    @Operation(summary = "Listar todas as consultas")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consultas listadas com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Nenhuma consulta encontrada")
+    })
     @PreAuthorize("hasRole('ADMIN') or hasRole('MEDICO') or hasRole('PACIENTE')")
     @GetMapping("/all")
     public ResponseEntity<List<ConsultaResponseDTO>> listarConsultas() {
         return ResponseEntity.ok(consultaService.listarConsultas());
     }
 
+    // DTO para edição da data da consulta
+    public static class AtualizarDataDTO {
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+        private LocalDate data;
+
+        public LocalDate getData() {
+            return data;
+        }
+        public void setData(LocalDate data) {
+            this.data = data;
+        }
+    }
+
+    @Operation(summary = "Remarcar data da consulta")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Consulta atualizada com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Erro ao atualizar"),
+        @ApiResponse(responseCode = "404", description = "Consulta não encontrada para atualização")
+    })
     
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> editarConsulta(
             @PathVariable Long id,
-            @RequestBody LocalDate data) {
+            @RequestBody AtualizarDataDTO dto) {
         try {
-            return ResponseEntity.ok(consultaService.editarConsulta(id, data));
+            var consultaAtualizada = consultaService.editarConsulta(id, dto.getData());
+            return ResponseEntity.ok(consultaAtualizada);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    
-    @DeleteMapping("delete/{id}")
+    @Operation(summary = "Cancelar uma consulta")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Consulta excluída com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Erro ao cancelar a consulta"),
+        @ApiResponse(responseCode = "404", description = "Consulta não encontrada para exclusão")
+    })
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MEDICO') or hasRole('PACIENTE')")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> cancelarConsulta(@PathVariable Long id) {
         try {
             consultaService.cancelarConsulta(id);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build();  // 204 No Content
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    // GET /consultas/buscar?termo=... → Buscar por termo (data, especialidade ou nome do médico)
+    @Operation(summary = "Buscar por Termo")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Sucesso ao buscar"),
+        @ApiResponse(responseCode = "400", description = "Erro ao buscar")
+    })
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MEDICO') or hasRole('PACIENTE')")
     @GetMapping("/buscar")
     public ResponseEntity<List<ConsultaResponseDTO>> buscarPorTermo(@RequestParam String termo) {
         return ResponseEntity.ok(consultaService.buscarPorTermo(termo));
     }
 }
+

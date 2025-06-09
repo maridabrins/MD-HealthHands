@@ -33,6 +33,14 @@ public class SegurancaFilterChain {
                 .requestMatchers(HttpMethod.POST, "/medico/create").permitAll()
                 .requestMatchers(HttpMethod.POST, "/paciente/create").permitAll()
                 
+                .requestMatchers(
+                        "/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html",
+                        "/swagger-resources/**",
+                        "/webjars/**"
+                    ).permitAll()
+                
                 .requestMatchers(HttpMethod.POST, "/consultas/agendar").hasAnyRole("ADMIN", "PACIENTE")
                 .requestMatchers(HttpMethod.GET, "/consultas/all").hasAnyRole("MEDICO", "PACIENTE", "ADMIN")
                 .requestMatchers(HttpMethod.GET, "/consultas/buscar").hasAnyRole("MEDICO", "PACIENTE", "ADMIN")
