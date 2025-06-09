@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports 
+                                  http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="relatorio_consultas" pageWidth="595" pageHeight="842" columnWidth="555"
+              leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bde4efb2-22c5-45c7-bcdc-123456789abc">
+
+    <!-- Campos que correspondem ao RelatorioConsultaDTO -->
+    <field name="consulta" class="java.lang.Long"/>
+    <field name="paciente" class="java.lang.String"/>
+    <field name="medico" class="java.lang.String"/>
+    <field name="especialidade" class="java.lang.String"/>
+    <field name="data" class="java.lang.String"/>
+
+    <!-- Título -->
+    <title>
+        <band height="40">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="30"/>
+                <textElement textAlignment="Center">
+                    <font size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Relatório de Consultas]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <!-- Cabeçalho das colunas -->
+    <columnHeader>
+        <band height="20">
+            <staticText><reportElement x="0" y="0" width="50" height="20"/><text><![CDATA[ID]]></text></staticText>
+            <staticText><reportElement x="50" y="0" width="130" height="20"/><text><![CDATA[Paciente]]></text></staticText>
+            <staticText><reportElement x="180" y="0" width="130" height="20"/><text><![CDATA[Médico]]></text></staticText>
+            <staticText><reportElement x="310" y="0" width="130" height="20"/><text><![CDATA[Especialidade]]></text></staticText>
+            <staticText><reportElement x="440" y="0" width="115" height="20"/><text><![CDATA[Data]]></text></staticText>
+        </band>
+    </columnHeader>
+
+    <!-- Corpo do relatório -->
+    <detail>
+        <band height="20">
+            <textField><reportElement x="0" y="0" width="50" height="20"/><textFieldExpression><![CDATA[$F{consulta}]]></textFieldExpression></textField>
+            <textField><reportElement x="50" y="0" width="130" height="20"/><textFieldExpression><![CDATA[$F{paciente}]]></textFieldExpression></textField>
+            <textField><reportElement x="180" y="0" width="130" height="20"/><textFieldExpression><![CDATA[$F{medico}]]></textFieldExpression></textField>
+            <textField><reportElement x="310" y="0" width="130" height="20"/><textFieldExpression><![CDATA[$F{especialidade}]]></textFieldExpression></textField>
+            <textField><reportElement x="440" y="0" width="115" height="20"/><textFieldExpression><![CDATA[$F{data}]]></textFieldExpression></textField>
+        </band>
+    </detail>
+
+</jasperReport>

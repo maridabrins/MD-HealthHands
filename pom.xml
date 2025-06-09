@@ -31,6 +31,20 @@
 		<java.version>21</java.version>
 	</properties>
 	<dependencies>
+	
+	<dependency>
+    <groupId>net.sf.jasperreports</groupId>
+    <artifactId>jasperreports</artifactId>
+    <version>6.20.0</version>
+</dependency>
+
+<!-- Para gerar PDF -->
+<dependency>
+    <groupId>com.lowagie</groupId>
+    <artifactId>itext</artifactId>
+    <version>2.1.7</version>
+</dependency>
+
 
 
 		<!-- Spring Security -->
