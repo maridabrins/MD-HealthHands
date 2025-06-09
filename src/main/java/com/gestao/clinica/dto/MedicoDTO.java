@@ -2,49 +2,45 @@ package com.gestao.clinica.dto;
 
 import com.gestao.clinica.entities.Especialidades;
 import com.gestao.clinica.entities.Medico;
-import com.gestao.clinica.entities.Roles;
+
 
 public class MedicoDTO {
 	
-	private Long id;
+	private String login;
+	private String senha;
+	
+	
 	private int crm;
 	private String nome;
 	private String telefone;
 	private String email;
 	private Especialidades especialidade;
-	private Roles role;
+	
 	
 	public MedicoDTO() {
 	}
 
-	public MedicoDTO(Long id, int crm, String nome, String telefone, String email, Especialidades especialidade, Roles role) {
-		this.id = id;
+	public MedicoDTO( int crm, String nome, String telefone, String email, Especialidades especialidade) {
+		
 		this.crm = crm;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
 		this.especialidade = especialidade;
-		this.role = role;
+		
 	}
 	
 	public MedicoDTO(Medico entity) {
-		id = entity.getId();
+		
 		crm = entity.getCrm();
 		nome = entity.getNome();
 		telefone = entity.getTelefone();
 		email = entity.getEmail();
 		especialidade = entity.getEspecialidade();
-		role = entity.getRole();
+		
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public int getCrm() {
 		return crm;
 	}
@@ -85,13 +81,23 @@ public class MedicoDTO {
 		this.especialidade = especialidade;
 	}
 
-	public Roles getRole() {
-		return role;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setRole(Roles role) {
-		this.role = role;
+	public void setLogin(String login) {
+		this.login = login;
 	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+
 	
 	
 	

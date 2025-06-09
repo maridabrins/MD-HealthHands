@@ -2,47 +2,57 @@ package com.gestao.clinica.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table( name = "tb_medico")
-public class Medico {
+public class Medico  {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private int crm;
 	private String nome;
 	private String telefone;
 	private String email;
-	
 	private Especialidades especialidade;
-	private Roles role;
 	
-	 @OneToMany(mappedBy = "medico")
-	 private List<Consulta> consultas;
+	@JsonIgnore
+	@OneToMany(mappedBy = "medico")
+	private List<Consulta> consultas;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
+	private Usuario usuario;
+	
+	
 	
 	public Medico() {
 	}
 
 	public Medico(Long id, int crm, String nome, String telefone, String email, Especialidades especialidade,
-			Roles role, List<Consulta> consultas) {
+			 List<Consulta> consultas) {
 		this.id = id;
 		this.crm = crm;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
 		this.especialidade = especialidade;
-		this.role = role;
 		this.consultas = consultas;
 	}
 
+
+	
 
 	public Long getId() {
 		return id;
@@ -93,15 +103,6 @@ public class Medico {
 	}
 	
 
-	public Roles getRole() {
-		return role;
-	}
-
-
-	public void setRole(Roles role) {
-		this.role = role;
-	}
-
 
 	public List<Consulta> getConsultas() {
 		return consultas;
@@ -110,6 +111,14 @@ public class Medico {
 
 	public void setConsultas(List<Consulta> consultas) {
 		this.consultas = consultas;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	
