@@ -27,11 +27,14 @@ public class SegurancaFilterChain {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+            	.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 // Rotas públicas (login e cadastro)
                 .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/usuario").permitAll()
                 .requestMatchers(HttpMethod.POST, "/medico/create").permitAll()
                 .requestMatchers(HttpMethod.POST, "/paciente/create").permitAll()
+                .requestMatchers(HttpMethod.GET, "paciente/all").permitAll()
+                .requestMatchers(HttpMethod.GET, "medico/all").permitAll()
                 
                 .requestMatchers(
                         "/v3/api-docs/**",
