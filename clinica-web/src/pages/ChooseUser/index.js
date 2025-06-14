@@ -11,14 +11,14 @@ export default function ChooseUser() {
           <h2>Venha fazer parte</h2>
           <div className='user-cards'>
 
-            <Link to="/register-patient" className='card-link'>
+            <Link to="/paciente/create" className='card-link'>
               <div className='card-infos'>
                 <img src={Paciente} alt='icone homem de cabelo preto' />
                 <p>Paciente</p>
               </div>
             </Link>
 
-            <Link to="/register-doctor" className='card-link'>
+            <Link to="/medico/create" className='card-link'>
               <div className='card-infos'>
                 <img src={Medico} alt='icone homem de cabelo preto com jaleco e estetoscópio' />
                 <p>Médico</p>

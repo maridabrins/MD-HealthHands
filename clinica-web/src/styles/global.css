@@ -43,3 +43,14 @@ a{
 .button-primary a{
     text-decoration: none;
 }
+
+.button-secondary{
+    background-color:var(--color-white) ;
+    color: var(--primary-color);
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s ease-in;
+    font-weight: 700;
+}
