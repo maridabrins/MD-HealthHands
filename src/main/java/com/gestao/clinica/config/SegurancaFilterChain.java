@@ -28,13 +28,14 @@ public class SegurancaFilterChain {
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
             	.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            	.requestMatchers(HttpMethod.GET, "/").permitAll()
                 // Rotas públicas (login e cadastro)
                 .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/usuario").permitAll()
                 .requestMatchers(HttpMethod.POST, "/medico/create").permitAll()
                 .requestMatchers(HttpMethod.POST, "/paciente/create").permitAll()
-                .requestMatchers(HttpMethod.GET, "paciente/all").permitAll()
-                .requestMatchers(HttpMethod.GET, "medico/all").permitAll()
+                .requestMatchers(HttpMethod.GET, "/paciente/all").permitAll()
+                .requestMatchers(HttpMethod.GET, "/medico/all").permitAll()
                 
                 .requestMatchers(
                         "/v3/api-docs/**",
@@ -50,7 +51,6 @@ public class SegurancaFilterChain {
                 .requestMatchers(HttpMethod.PUT, "/consultas/update/**").hasAnyRole("MEDICO", "PACIENTE", "ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/consultas/delete/**").hasAnyRole("MEDICO", "PACIENTE", "ADMIN")
                 
-                .requestMatchers(HttpMethod.GET, "medico/all").hasAnyRole("ADMIN")
                 // Protege todas as outras rotas
                 .anyRequest().authenticated()
             )
