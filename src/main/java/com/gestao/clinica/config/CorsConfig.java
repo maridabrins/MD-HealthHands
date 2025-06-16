@@ -9,7 +9,9 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
     	registry.addMapping("/**")
-        .allowedOrigins("https://gestao-clinicamedica-c2edatdwbcace3gw.brazilsouth-01.azurewebsites.net")
+        .allowedOrigins(
+        		"http://localhost:3000",
+        		"https://gestao-clinicamedica-c2edatdwbcace3gw.brazilsouth-01.azurewebsites.net")
         .allowedMethods("*")
         .allowedHeaders("*")
         .allowCredentials(true);

@@ -60,6 +60,7 @@ public class LoginService implements UserDetailsService {
 			String token = JWT.create()
 					.withIssuer("clinica-api")
 					.withSubject(usuario.getLogin())
+					 .withClaim("role", usuario.getPerfil().name())
 					.withExpiresAt(Instant.now().plusSeconds(3600))
 					.sign(algorithm);
 			return token;			
