@@ -1,0 +1,80 @@
+header{
+    background-color: var(--color-white);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 14px;
+    margin-bottom: 41px;
+    
+}
+
+header .logo{
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 800;
+
+}
+
+header .logo img{
+    width: 78px;
+    height: 78px;
+}
+
+nav{
+   display: flex;
+   gap: 54px;
+}
+nav a{
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 20px;
+
+}
+
+.foto-perfil{
+    width: 60px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.modal-usuario{
+    position: absolute;
+    background-color: #f6e5fd;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 15px;
+    padding: 20px 30px;
+
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+.line{
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-white);
+}
+
+.modal-usuario button{
+    
+     font-size: 16px;
+     background: transparent ;
+     font-weight: 600;
+}
+.modal-usuario button:hover{
+    color: #ff0000;
+}
+
+.logoutIcon{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
