@@ -5,8 +5,8 @@
 <!-- MODELO MENU DE NAVEGAÇÃO -->
 <p align="center">
 <a href="#-sobre-o-projeto">Sobre</a> •
- <a href="#-Descrição-do-entregável">Descrição do Entregável</a> •
- <a href="#-funcionalidades ">Funcionalidades </a> • 
+ <a href="#-descrição-do-entregável">Descrição do Entregável</a> •
+ <a href="#-funcionalidades">Funcionalidades </a> • 
  <a href="#-layout">Layout</a> • 
  <a href="#-como-executar-o-projeto">Como executar</a> • 
  <a href="#-pré-requisitos">Pré-requisitos</a> • 
@@ -129,7 +129,7 @@ src/
 <!-- EXEMPLO DE LAYOUT: -->
 ## 🎨 Layout
 
-![Web1](https://github.com/maridabrins/Nexcent/blob/main/src/assets/images/Thumbnail.png)
+![Web1](https://github.com/maridabrins/MD-HealthHands/blob/main/thumb-clinica.PNG)
 
 ---
 
@@ -159,7 +159,7 @@ Você também pode acessar clicando nesse link da Azure:
 ---
 
 <!-- MODELO DE PRÉ REQUISITOS -->
-### Pré-requisitos
+## Pré-requisitos
 
 
 Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
