@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import medico from '../../assets/medico.svg';
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../../services/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 
 export default function RegisterDoctor() {
@@ -31,7 +31,7 @@ export default function RegisterDoctor() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8080/medico/create', formData);
+      await api.post('/medico/create', formData);
       toast.success("Médico cadastrado com sucesso!");
 
       setTimeout(() => {

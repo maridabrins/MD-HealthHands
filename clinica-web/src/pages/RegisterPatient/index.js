@@ -29,7 +29,7 @@ export default function RegisterPatient() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post('/paciente/create', formData);
+     await api.post('/paciente/create', formData);
       toast.success("Paciente cadastrado com sucesso!");
 
       setTimeout(() => {
